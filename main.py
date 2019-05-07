@@ -6,11 +6,10 @@ from font_fredoka_one import FredokaOne
 
 # Load graphic
 
-img = Image.open("/home/pi/inky-hole/logo.png")
 
-inky_display = InkyPHAT("red")
-inky_display.set_border(inky_display.WHITE)
-inky_display.set_image(img)
+img = Image.open("/home/pi/inky-hole/logo.png")
+draw = ImageDraw.Draw(img)
+
 
 # get api data
 
@@ -36,6 +35,10 @@ queries = 'Queries: ' + str(queries)
 blocked = 'Blocked: ' + str(adsblocked)
 ratio   = 'Ratio: ' + str(ratio)
 
-inky_display.text((10, 10), name, inky_display.BLACK, font)
+draw.text((10, 10), queries, inky_display.BLACK, font)
+
+inky_display = InkyPHAT("red")
+inky_display.set_border(inky_display.WHITE)
+inky_display.set_image(img)
 
 inky_display.show()
