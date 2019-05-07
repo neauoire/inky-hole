@@ -12,16 +12,16 @@ draw = ImageDraw.Draw(img)
 # get api data
 
 try:
-    f = urllib2.urlopen('http://pi.hole/admin/api.php')
-    json_string = f.read()
-    parsed_json = json.loads(json_string)
-    adsblocked = parsed_json['ads_blocked_today']
-    ratioblocked = parsed_json['ads_percentage_today']
-    f.close()
+  f = urllib2.urlopen('http://pi.hole/admin/api.php')
+  json_string = f.read()
+  parsed_json = json.loads(json_string)
+  adsblocked = parsed_json['ads_blocked_today']
+  ratioblocked = parsed_json['ads_percentage_today']
+  f.close()
 except:
-    queries = '?'
-    adsblocked = '?'
-    ratio = '?'
+  queries = '?'
+  adsblocked = '?'
+  ratio = '?'
 
 font = ImageFont.truetype(FredokaOne, 32)
 
