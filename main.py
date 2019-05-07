@@ -15,28 +15,19 @@ try:
     f = urllib2.urlopen('http://pi.hole/admin/api.php')
     json_string = f.read()
     parsed_json = json.loads(json_string)
-
-    queries = parsed_json['dns_queries_today']
     adsblocked = parsed_json['ads_blocked_today']
-    ratio = parsed_json['ads_percentage_today']
-
     f.close()
 except:
     queries = '?'
     adsblocked = '?'
     ratio = '?'
 
-
 font = ImageFont.truetype(FredokaOne, 22)
-
-queries = 'Queries: ' + str(queries)
-blocked = 'Blocked: ' + str(adsblocked)
-ratio   = 'Ratio: ' + str(ratio)
 
 inky_display = InkyPHAT("red")
 inky_display.set_border(inky_display.WHITE)
 
-draw.text((10, 10), queries, inky_display.BLACK, font)
+draw.text((20, 35), str(adsblocked), inky_display.BLACK, font)
 
 inky_display.set_image(img)
 
