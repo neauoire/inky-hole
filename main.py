@@ -2,6 +2,7 @@ import json
 import urllib2
 from inky import InkyPHAT
 from PIL import Image, ImageFont, ImageDraw
+from font_fredoka_one import FredokaOne
 
 # Load graphic
 
@@ -28,7 +29,8 @@ except:
     adsblocked = '?'
     ratio = '?'
 
-font = ImageFont.truetype(inky_display.fonts.AmaticSCBold, 38)
+
+font = ImageFont.truetype(FredokaOne, 22)
 
 queries = 'Queries: ' + str(queries)
 blocked = 'Blocked: ' + str(adsblocked)
