@@ -1,46 +1,39 @@
+import json
+import urllib2
 from inky import InkyPHAT
+from PIL import Image, ImageFont, ImageDraw
+
+# Load graphic
+
+img = Image.open("/home/pi/inky-hole/logo.png")
 
 inky_display = InkyPHAT("red")
 inky_display.set_border(inky_display.WHITE)
+inky_display.set_image(img)
 
-from PIL import Image, ImageFont, ImageDraw
-
-# img = Image.new("P", (inky_display.WIDTH, inky_display.HEIGHT))
-# draw = ImageDraw.Draw(img)
-
-# from font_fredoka_one import FredokaOne
-
-# font = ImageFont.truetype(FredokaOne, 22)
-
-# message = "Hello, World!"
-# w, h = font.getsize(message)
-# x = (inky_display.WIDTH / 2) - (w / 2)
-# y = (inky_display.HEIGHT / 2) - (h / 2)
-
-# draw.text((x, y), message, inky_display.RED, font)
-# inky_display.set_image(img)
-# inky_display.show()
-
-import json
-import urllib2
+# get api data
 
 try:
     f = urllib2.urlopen('http://pi.hole/admin/api.php')
     json_string = f.read()
     parsed_json = json.loads(json_string)
+
     queries = parsed_json['dns_queries_today']
     adsblocked = parsed_json['ads_blocked_today']
-    clients = parsed_json['unique_clients']
+    ratio = parsed_json['ads_percentage_today']
+
     f.close()
 except:
-    queries = '-'
-    adsblocked = '-'
-    clients = '-'
+    queries = '?'
+    adsblocked = '?'
+    ratio = '?'
 
-pihole = 'DNS-Queries: ' + str(queries) + ' - ' + 'Ads blocked: ' + str(adsblocked) + ' - ' + 'Devices: ' + str(clients)
-print pihole
+font = ImageFont.truetype(inkyphat.fonts.AmaticSCBold, 38)
 
+queries = 'Queries: ' + str(queries)
+blocked = 'Blocked: ' + str(adsblocked)
+ratio   = 'Ratio: ' + str(ratio)
 
-# img = Image.open("/home/pi/inky-hole/logo.png")
-# inky_display.set_image(img)
-# inky_display.show()
+inkyphat.text((10, 10), name, inkyphat.BLACK, font)
+
+inky_display.show()
