@@ -28,12 +28,12 @@ except:
     adsblocked = '?'
     ratio = '?'
 
-font = ImageFont.truetype(inkyphat.fonts.AmaticSCBold, 38)
+font = ImageFont.truetype(inky_display.fonts.AmaticSCBold, 38)
 
 queries = 'Queries: ' + str(queries)
 blocked = 'Blocked: ' + str(adsblocked)
 ratio   = 'Ratio: ' + str(ratio)
 
-inkyphat.text((10, 10), name, inkyphat.BLACK, font)
+inky_display.text((10, 10), name, inky_display.BLACK, font)
 
 inky_display.show()
