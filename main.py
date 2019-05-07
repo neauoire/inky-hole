@@ -29,7 +29,7 @@ inky_display = InkyPHAT("red")
 inky_display.set_border(inky_display.WHITE)
 
 draw.text((20,20), str(adsblocked), inky_display.BLACK, font)
-draw.text((20,40), str("%.2f" % round(ratioblocked,2)) + "%", inky_display.BLACK, font)
+draw.text((20,50), str("%.1f" % round(ratioblocked,2)) + "%", inky_display.BLACK, font)
 
 inky_display.set_image(img)
 
