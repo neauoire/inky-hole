@@ -22,12 +22,12 @@ except:
     adsblocked = '?'
     ratio = '?'
 
-font = ImageFont.truetype(FredokaOne, 24)
+font = ImageFont.truetype(FredokaOne, 32)
 
 inky_display = InkyPHAT("red")
 inky_display.set_border(inky_display.WHITE)
 
-draw.text((20,40), str(adsblocked), inky_display.BLACK, font)
+draw.text((20,30), str(adsblocked), inky_display.BLACK, font)
 
 inky_display.set_image(img)
 
