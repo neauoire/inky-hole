@@ -6,7 +6,7 @@ from font_fredoka_one import FredokaOne
 
 # Load graphic
 
-img = Image.open("/home/pi/inky-hole/logo.png")
+img = Image.open("./logo.png")
 draw = ImageDraw.Draw(img)
 
 # get api data
