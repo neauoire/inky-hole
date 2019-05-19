@@ -1,8 +1,13 @@
+import os
 import json
 import urllib2
 from inky import InkyPHAT
 from PIL import Image, ImageFont, ImageDraw
 from font_fredoka_one import FredokaOne
+
+# Set current directory
+
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 # Load graphic
 
