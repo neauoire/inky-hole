@@ -1,12 +1,17 @@
+import os
 import json
 import urllib2
 from inky import InkyPHAT
 from PIL import Image, ImageFont, ImageDraw
 from font_fredoka_one import FredokaOne
 
+# Set current directory
+
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
 # Load graphic
 
-img = Image.open("/home/pi/inky-hole/logo.png")
+img = Image.open("./logo.png")
 draw = ImageDraw.Draw(img)
 
 # get api data
