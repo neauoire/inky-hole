@@ -24,9 +24,8 @@ try:
   ratioblocked = parsed_json['ads_percentage_today']
   f.close()
 except:
-  queries = '?'
   adsblocked = '?'
-  ratio = '?'
+  ratioblocked = '?'
 
 font = ImageFont.truetype(FredokaOne, 32)
 
