@@ -1,6 +1,6 @@
 import os
 import json
-import urllib2
+import urllib3
 from inky import InkyPHAT
 from PIL import Image, ImageFont, ImageDraw
 from font_fredoka_one import FredokaOne
@@ -17,7 +17,7 @@ draw = ImageDraw.Draw(img)
 # get api data
 
 try:
-  f = urllib2.urlopen('http://pi.hole/admin/api.php')
+  f = urllib3.urlopen('http://pi.hole/admin/api.php')
   json_string = f.read()
   parsed_json = json.loads(json_string)
   adsblocked = parsed_json['ads_blocked_today']
