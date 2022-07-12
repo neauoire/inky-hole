@@ -1,6 +1,8 @@
 import os
 import json
-import urllib2
+import urllib3
+from sys import exit
+
 from inky import InkyPHAT
 from PIL import Image, ImageFont, ImageDraw
 from font_fredoka_one import FredokaOne
@@ -16,16 +18,19 @@ draw = ImageDraw.Draw(img)
 
 # get api data
 
+http = urllib3.PoolManager()
+
 try:
-  f = urllib2.urlopen('http://pi.hole/admin/api.php')
-  json_string = f.read()
-  parsed_json = json.loads(json_string)
-  adsblocked = parsed_json['ads_blocked_today']
-  ratioblocked = parsed_json['ads_percentage_today']
-  f.close()
+  r = http.request('GET', 'http://10.0.7.230/admin/api.php')
+  if r.status >= 200 or r.status <= 299:
+    exit("http request is unsuccessful")
 except:
   adsblocked = '?'
   ratioblocked = '?'
+
+parsed_json = json.loads(r.data)
+adsblocked = parsed_json['ads_blocked_today']
+ratioblocked = parsed_json['ads_percentage_today']
 
 font = ImageFont.truetype(FredokaOne, 32)
 
@@ -33,8 +38,13 @@ inky_display = InkyPHAT("red")
 inky_display.set_border(inky_display.WHITE)
 
 draw.text((20,20), str(adsblocked), inky_display.BLACK, font)
-draw.text((20,50), str("%.1f" % round(ratioblocked,2)) + "%", inky_display.BLACK, font)
 
+if isinstance(ratioblocked, str):
+  draw.text((20,50), f"{ratioblocked}%", inky_display.BLACK, font)
+else:
+  draw.text((20,50), f"{ratioblocked:.2f}%", inky_display.BLACK, font)
+
+img = img.rotate(180)
 inky_display.set_image(img)
 
 inky_display.show()
