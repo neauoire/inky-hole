@@ -21,17 +21,16 @@ draw = ImageDraw.Draw(img)
 http = urllib3.PoolManager()
 
 try:
-  r = http.request('GET', 'http://pi.hole/admin/api.php')
+  r = http.request('GET', 'http://10.0.7.230/admin/api.php')
   if r.status >= 200 or r.status <= 299:
     exit("http request is unsuccessful")
-  else:
-    parsed_json = json.loads(r.data)
-    adsblocked = parsed_json['ads_blocked_today']
-    ratioblocked = parsed_json['ads_percentage_today']
-    
 except:
   adsblocked = '?'
   ratioblocked = '?'
+
+parsed_json = json.loads(r.data)
+adsblocked = parsed_json['ads_blocked_today']
+ratioblocked = parsed_json['ads_percentage_today']
 
 font = ImageFont.truetype(FredokaOne, 32)
 
