@@ -45,6 +45,7 @@ if isinstance(ratioblocked, str):
 else:
   draw.text((20,50), f"{ratioblocked:.2f}%", inky_display.BLACK, font)
 
+img = img.rotate(180)
 inky_display.set_image(img)
 
 inky_display.show()
